@@ -41,10 +41,10 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, Car $car)
+    public function show(Request $request,Car $car)
     {
 
-        return view('car.show', ['$car' => $car]);
+        return view('car.show', ['car' => $car]);
     }
 
     /**
@@ -84,8 +84,9 @@ class CarController extends Controller
 
     public function watchlist()
     {
-        $cars = User::find()
-            ->favouriteCars()
+
+        $cars = User::find(4)
+            ->favouriteCars() //relacija iz User Modela
             ->with(['primaryImage', 'city', 'carType', 'fuelType', 'maker', 'model'])
             ->paginate(15);
 
