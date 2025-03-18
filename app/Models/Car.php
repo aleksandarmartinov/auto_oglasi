@@ -75,7 +75,7 @@ class Car extends Model
 
     public function images(): HasMany
     {
-        return $this->hasMany(CarImage::class);
+        return $this->hasMany(CarImage::class)->orderBy('position');
     }
 
     public function favouredUsers(): BelongsToMany
@@ -86,5 +86,15 @@ class Car extends Model
     public function getCreateDate(): string
     {
         return (new Carbon($this->created_at))->format('Y-m-d');
+    }
+
+    public function getTitle()
+    {
+        return $this->year . ' - ' . $this->maker->name . ' ' . $this->model->name;
+    }
+
+    public function isInWatchlist(User $user = null)
+    {
+        return $this->favouredUsers()->contains($user);
     }
 }
