@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
@@ -75,17 +76,14 @@ class CarController extends Controller
 
     public function edit(Car $car)
     {
-        if ($car->user_id !== Auth::id()) {
-            abort(403);
-        }
+        Gate::authorize('update', $car);
+
         return view('car.edit', ['car' => $car]);
     }
 
     public function update(StoreCarRequest $request, Car $car)
     {
-        if ($car->user_id !== Auth::id()) {
-            abort(403);
-        }
+        Gate::authorize('update', $car);
 
         // validacija iz request-a
         $data = $request->validated();
@@ -118,9 +116,7 @@ class CarController extends Controller
 
     public function destroy(Car $car)
     {
-        if ($car->user_id !== Auth::id()) {
-            abort(403);
-        }
+        Gate::authorize('delete', $car);
 
         $car->delete();
 
@@ -199,14 +195,14 @@ class CarController extends Controller
 
     public function carImages(Car $car)
     {
+        Gate::authorize('update', $car);
+
         return view('car.images', ['car' => $car]);
     }
 
     public function updateImages(Request $request, Car $car)
     {
-        if ($car->user_id !== Auth::id()) {
-            abort(403);
-        }
+        Gate::authorize('update', $car);
 
         // validacija slika i pozicija slika
         $data = $request->validate([
@@ -244,9 +240,7 @@ class CarController extends Controller
 
     public function addImages(Request $request, Car $car)
     {
-        if ($car->user_id !== Auth::id()) {
-            abort(403);
-        }
+        Gate::authorize('update', $car);
 
         // slika iz request-a
         $images = $request->file('images') ?? [];

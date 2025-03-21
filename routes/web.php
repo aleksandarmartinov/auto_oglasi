@@ -14,7 +14,7 @@ Route::get('/car/search', [CarController::class, 'search'])->name('car.search');
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['verified'])->group(function() {
         Route::get('/watchlist', [WatchlistController::class, 'index'])->name('watchlist.index');
-        Route::get('/watchlist/{car}', [WatchlistController::class, 'storeOrDestroy'])->name('watchlist.storeOrDestroy');
+        Route::post('/watchlist/{car}', [WatchlistController::class, 'storeOrDestroy'])->name('watchlist.storeOrDestroy');
 
         Route::resource('car', CarController::class)->except(['show']);
 
