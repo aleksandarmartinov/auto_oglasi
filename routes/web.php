@@ -14,7 +14,7 @@ Route::get('/car/search', [CarController::class, 'search'])->name('car.search');
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['verified'])->group(function() {
         Route::get('/watchlist', [WatchlistController::class, 'index'])->name('watchlist.index');
-        Route::post('/watchlist/{car}', [WatchlistController::class, 'storeOrDestroy'])->name('watchlist.storeOrDestroy');
+        Route::post('/watchlist/{car}', [WatchlistController::class, 'addOrRemove'])->name('watchlist.addOrRemove');
 
         Route::resource('car', CarController::class)->except(['show']);
 
@@ -23,11 +23,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/car/{car}/images', [CarController::class, 'addImages'])->name('car.addImages');
     });
 
+    // User ne mora da ima verifikovan nalog da bi mogao da update svoj profil (ali mora da bude logovan - zato je pod auth middleware)
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });
 
 Route::get('/car/{car}', [CarController::class, 'show'])->name('car.show');
+Route::post('/car/phone/{car}', [CarController::class, 'showPhone'])->name('car.showPhone');
 
 require __DIR__.'/auth.php';

@@ -3,8 +3,7 @@
         <div class="card p-large my-large">
             <h2>Verify Your Email Address</h2>
             <div class="my-medium">
-                Before proceeding, please check your email for a verification link.
-                If you did not receive the email,
+                Proverite vaš u  E-Mail
                 <form action="{{ route('verification.send') }}" method="POST" class="inline-flex">
                     @csrf
                     <button class="btn-link">click here to request another</button>

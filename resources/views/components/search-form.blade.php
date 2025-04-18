@@ -23,34 +23,33 @@
                     <x-select-car-type />
                 </div>
                 <div>
-                    <input type="number" placeholder="Year From" name="year_from" />
+                    <input type="number" placeholder="Godište od" name="year_from" />
                 </div>
                 <div>
-                    <input type="number" placeholder="Year To" name="year_to" />
+                    <input type="number" placeholder="Godište do" name="year_to" />
                 </div>
                 <div>
                     <input
                         type="number"
-                        placeholder="Price From"
+                        placeholder="Cena od"
                         name="price_from"
                     />
                 </div>
                 <div>
-                    <input type="number" placeholder="Price To" name="price_to" />
+                    <input type="number" placeholder="Cena do" name="price_to" />
                 </div>
                 <div>
                     <x-select-fuel-type />
                 </div>
             </div>
             <div>
-                <button type="button" class="btn btn-find-a-car-reset">
-                    Reset
-                </button>
                 <button class="btn btn-primary btn-find-a-car-submit">
-                    Search
+                    Pretraga
                 </button>
             </div>
         </form>
     </div>
 </section>
 <!--/ Find a car form -->
+
+

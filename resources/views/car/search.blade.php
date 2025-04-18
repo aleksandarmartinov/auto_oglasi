@@ -20,27 +20,25 @@
                                     d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5"
                                 />
                             </svg>
-                            Filters
+                            Filteri
                         </button>
-                        <h2>Define your search criteria</h2>
+                        <h2>Pretraga automobila po kriterijumima</h2>
                     </div>
 
                     <select class="sort-dropdown">
-                        <option value="">Order By</option>
-                        <option value="price">Price Asc</option>
-                        <option value="-price">Price Desc</option>
-                        <option value="year">Year Asc</option>
-                        <option value="-year">Year Desc</option>
-                        <option value="mileage">Mileage Asc</option>
-                        <option value="-mileage">Mileage Desc</option>
-                        <option value="published_at">Newest At the top</option>
-                        <option value="-published_at">Oldest At the top</option>
+                        <option value="" disabled selected style="display:none;">Poredjaj po</option>
+                        <option value="price">Cena uzlazno</option>
+                        <option value="-price">Cena silazno</option>
+                        <option value="year">Godište uzlazno</option>
+                        <option value="-year">Godište silazno</option>
+                        <option value="published_at">Najnovije dodati prvo</option>
+                        <option value="-published_at">Najstarije dodati prvo</option>
                     </select>
                 </div>
                 <div class="search-car-results-wrapper">
                     <div class="search-cars-sidebar">
                         <div class="card card-found-cars">
-                            <p class="m-0">Found <strong>{{ $cars->total() }}</strong> cars</p>
+                            <p class="m-0">Pronadjeno <strong>{{ $cars->total() }}</strong> automobila</p>
 
                             <button class="close-filters-button">
                                 <svg
@@ -67,7 +65,7 @@
                             >
                                 <div class="find-a-car-inputs">
                                     <div class="form-group">
-                                        <label class="mb-medium">Maker</label>
+                                        <label class="mb-medium">Proizvođač</label>
                                         <x-select-maker :value="request('maker_id')"/>
                                     </div>
                                     <div class="form-group">
@@ -75,68 +73,65 @@
                                         <x-select-model :value="request('model_id')"/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-medium">Type</label>
+                                        <label class="mb-medium">Karoserija</label>
                                         <x-select-car-type :value="request('car_type_id')"/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-medium">Year</label>
+                                        <label class="mb-medium">Godište</label>
                                         <div class="flex gap-1">
                                             <input
                                                 type="number"
-                                                placeholder="Year From"
+                                                placeholder="Godište od"
                                                 name="year_from"
                                                 value="{{ request('year_from') }}"
                                             />
                                             <input
                                                 type="number"
-                                                placeholder="Year To"
+                                                placeholder="do"
                                                 name="year_to"
                                                 value="{{ request('year_to') }}"
                                             />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-medium">Price</label>
+                                        <label class="mb-medium">Cena</label>
                                         <div class="flex gap-1">
                                             <input
                                                 type="number"
-                                                placeholder="Price From"
+                                                placeholder="Cena od"
                                                 name="price_from"
                                                 value="{{ request('price_from') }}"
                                             />
                                             <input
                                                 type="number"
-                                                placeholder="Price To"
+                                                placeholder="Cena do"
                                                 name="price_to"
                                                 value="{{ request('price_to') }}"
                                             />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-medium">Mileage</label>
+                                        <label class="mb-medium">Kilometraža</label>
                                         <div class="flex gap-1">
                                             <x-select-mileage :value="request('mileage')"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-medium">State</label>
+                                        <label class="mb-medium">Država</label>
                                         <x-select-state :value="request('state_id')"/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-medium">City</label>
+                                        <label class="mb-medium">Grad</label>
                                         <x-select-city :value="request('city_id')"/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-medium">Fuel Type</label>
+                                        <label class="mb-medium">Gorivo</label>
                                         <x-select-fuel-type :value="request('fuel_type_id')"/>
                                     </div>
                                 </div>
                                 <div class="flex">
-                                    <button type="button" class="btn btn-find-a-car-reset">
-                                        Reset
-                                    </button>
                                     <button class="btn btn-primary btn-find-a-car-submit">
-                                        Search
+                                        Pretraži
                                     </button>
                                 </div>
                             </form>
@@ -153,7 +148,7 @@
                             </div>
                         @else
                             <div class="text-center p-large">
-                                No cars were found by your search criteria.
+                                Nema rezultata pretrage prema vašim kriterijumima.
                             </div>
                         @endif
                         {{ $cars->onEachSide(1)->links('pagination') }}

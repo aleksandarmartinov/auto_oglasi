@@ -15,25 +15,39 @@ class WatchlistController extends Controller
             ->with(['primaryImage', 'city', 'carType', 'fuelType', 'maker', 'model'])
             ->paginate(15);
 
-        return view('watchlist.index', ['cars' => $cars]);
+        return view('car-watchlist.index', ['cars' => $cars]);
     }
 
-    public function storeOrDestroy(Car $car)
+    public function addOrRemove(Car $car)
     {
         $user = Auth::user();
 
-        // Ako je vec favourite
+        // User ne moze dodavati svoj auto u favourite
+        if ($car->user_id === $user->id) {
+            return response()->json([
+                'added' => false,
+                'message' => 'Ne mozete dodati vaše automobile u listu omiljenih.'
+            ], 403);
+        }
+
+        // Provera da li je car pod tim id-em vec favourite
         $carExists = $user->favouriteCars()->where('car_id', $car->id)->exists();
 
-        // Remove ako postoji
+        // Metoda za remove iz favourites
         if ($carExists) {
             $user->favouriteCars()->detach($car);
 
-            return back()->with('success', 'Car was removed from watchlist');
+            return response()->json([
+                'added' => false,
+                'message' => 'Automobil je uklonjen sa liste omiljenih automobila.'
+            ]);
         }
 
-        // Dodaj u watchlist
+        // Ili da ga dodamo
         $user->favouriteCars()->attach($car);
-        return back()->with('success', 'Car was added to watchlist');
+        return response()->json([
+            'added' => true,
+            'message' => 'Automobil je dodat u listu omiljenih automobila.'
+        ]);
     }
 }

@@ -1,3 +1,7 @@
+@php
+    $isInWatchlist = $car->favouredUsers->contains(\Illuminate\Support\Facades\Auth::user())
+@endphp
+
 <x-app-layout>
     <main>
         <div class="container">
@@ -57,49 +61,49 @@
                     </div>
 
                     <div class="card car-detailed-description">
-                        <h2 class="car-details-title">Detailed Description</h2>
+                        <h2 class="car-details-title">Opis</h2>
                         {!! $car->description !!}
                     </div>
 
                     <div class="card car-detailed-description">
-                        <h2 class="car-details-title">Car Specifications</h2>
+                        <h2 class="car-details-title">Oprema</h2>
 
                         <ul class="car-specifications">
                             <x-car-specification :value="$car->features->air_conditioning" >
-                                Air Conditioning
+                                Klima
                             </x-car-specification>
                             <x-car-specification :value="$car->features->power_windows" >
-                                Power Windows
+                                Elektrčni podizači
                             </x-car-specification>
                             <x-car-specification :value="$car->features->power_door_locks" >
-                                Power Door Locks
+                                Centralno zaključavanje
                             </x-car-specification>
                             <x-car-specification :value="$car->features->abs" >
                                 ABS
                             </x-car-specification>
                             <x-car-specification :value="$car->features->cruise_control" >
-                                Cruise Control
+                                Navigacija
                             </x-car-specification>
                             <x-car-specification :value="$car->features->bluetooth_connectivity" >
-                                Bluetooth Connectivity
+                                Bluetooth konekcija
                             </x-car-specification>
                             <x-car-specification :value="$car->features->remote_start" >
-                                Remote Start
+                                Daljinsko paljenje
                             </x-car-specification>
                             <x-car-specification :value="$car->features->gps_navigation" >
-                                GPS Navigation System
+                                GPS navigacioni sistem
                             </x-car-specification>
                             <x-car-specification :value="$car->features->seat_heaters" >
-                                Seat Heaters
+                                Grejači sedišta
                             </x-car-specification>
                             <x-car-specification :value="$car->features->climate_control" >
-                                Climate Control
+                                Klimatska kontrola
                             </x-car-specification>
                             <x-car-specification :value="$car->features->rear_parking_sensors" >
-                                Rear Parking Sensors
+                                Kamere za parkiranje
                             </x-car-specification>
                             <x-car-specification :value="$car->features->leather_seats" >
-                                Leather Seats
+                                Kožna sedišta
                             </x-car-specification>
                         </ul>
                     </div>
@@ -107,19 +111,36 @@
                 <div class="car-details card">
                     <div class="flex items-center justify-between">
                         <p class="car-details-price">${{ $car->price }}</p>
-                        <button class="btn-heart">
+                        <button class="btn-heart text-primary"
+                                data-url="{{ route('watchlist.addOrRemove', $car) }}"> {{-- $car je Car Model--}}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke-width="1.5"
                                 stroke="currentColor"
-                                style="width: 20px"
+                                style="width: 16px"
+                                @class([
+                                    'hidden' => $isInWatchlist
+                                ])
                             >
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                     d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                                />
+                            </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                style="width: 16px"
+                                @class([
+                                    'hidden' => !$isInWatchlist
+                                ])
+                            >
+                                <path
+                                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
                                 />
                             </svg>
                         </button>
@@ -129,7 +150,7 @@
                     <table class="car-details-table">
                         <tbody>
                         <tr>
-                            <th>Maker</th>
+                            <th>Proizvodjač</th>
                             <td>{{ $car->maker->name }}</td>
                         </tr>
                         <tr>
@@ -137,27 +158,27 @@
                             <td>{{ $car->model->name }}</td>
                         </tr>
                         <tr>
-                            <th>Year</th>
+                            <th>Godište</th>
                             <td>{{ $car->year }}</td>
                         </tr>
                         <tr>
-                            <th>Vin</th>
+                            <th>Broj motora</th>
                             <td>{{ $car->vin }}</td>
                         </tr>
                         <tr>
-                            <th>Mileage</th>
+                            <th>Kilometraža</th>
                             <td>{{ $car->mileage }}</td>
                         </tr>
                         <tr>
-                            <th>Car Type</th>
+                            <th>Karoserija</th>
                             <td>{{ $car->carType->name }}</td>
                         </tr>
                         <tr>
-                            <th>Fuel Type</th>
+                            <th>Gorivo</th>
                             <td>{{ $car->fuelType->name }}</td>
                         </tr>
                         <tr>
-                            <th>Address </th>
+                            <th>Adresa </th>
                             <td>{{ $car->address }}</td>
                         </tr>
                         </tbody>
@@ -172,7 +193,7 @@
                         />
                         <div>
                             <h3 class="car-details-owner">{{ $car->owner->name }}</h3>
-                            <div class="text-muted">{{ $car->owner->cars()->count() }} cars</div>
+                            <div class="text-muted">{{ $car->owner->cars()->count() }} automobila</div>
                         </div>
                     </div>
                     <a href="tel:{{ \Illuminate\Support\Str::mask($car->phone, '*', -3) }}" class="car-details-phone">
@@ -191,8 +212,14 @@
                             />
                         </svg>
 
-                        {{ \Illuminate\Support\Str::mask($car->phone, '*', -3) }}
-                        <span class="car-details-phone-view">view full number</span>
+                        <span class="text-phone">
+                            {{ \Illuminate\Support\Str::mask($car->phone, '*', -3) }}
+                        </span>
+                        <span class="car-details-phone-view"
+                              data-url="{{ route('car.showPhone', $car) }}">
+                                 prikaži ceo broj
+                         </span>
+
                     </a>
                 </div>
             </div>

@@ -9,7 +9,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    public function redirectToProvider($provider) // Implement proper redirect to oauth provider
+    public function redirectToProvider($provider) // Redirect do providera (Google li FB)
     {
         return Socialite::driver($provider)->redirect();
     }

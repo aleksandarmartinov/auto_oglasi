@@ -3,11 +3,11 @@
         <section>
             <div class="container">
                 <div class="flex-justify-between item-center">
-                    <h2>My Favourite Cars</h2>
+                    <h2>Lista praćenih automobila</h2>
                     @if ($cars->total() > 0)
                     <div class="pagination-summary">
                         <p>
-                            Showing {{ $cars->firstItem() }} to {{ $cars->lastItem() }} of {{ $cars->total() }} results.
+                            Prikazano {{ $cars->firstItem() }} do {{ $cars->lastItem() }} od {{ $cars->total() }} rezultata.
                         </p>
                     </div>
                     @endif
@@ -19,7 +19,7 @@
             </div>
                 @if($cars->count() === 0)
                     <div class="text-center p-large">
-                        You don't have any favourite cars!
+                        Nema rezultata.
                     </div>
                 @endif
 

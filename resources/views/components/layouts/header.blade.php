@@ -1,7 +1,7 @@
 <header class="navbar">
     <div class="container navbar-content">
         <a href="/" class="logo-wrapper">
-            <img src="/img/logoipsum-265.svg" alt="Logo"/>
+            <img src="/img/logo-icon.svg" alt="Logo"/>
         </a>
         <button class="btn btn-default btn-navbar-toggle">
             <svg
@@ -36,12 +36,12 @@
                     />
                 </svg>
 
-                Add new Car
+                Postavi oglas
             </a>
             @auth()
                 <div class="navbar-menu" tabindex="-1">
                     <a href="javascript:void(0)" class="navbar-menu-handler">
-                        Welcome, {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                        Dobrodošao, {{ \Illuminate\Support\Facades\Auth::user()->name }}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -59,13 +59,13 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{{ route('profile.index') }}">My Profile</a>
+                            <a href="{{ route('profile.index') }}">Profil</a>
                         </li>
                         <li>
-                            <a href="{{ route('car.index') }}">My Cars</a>
+                            <a href="{{ route('car.index') }}">Moji Oglasi</a>
                         </li>
                         <li>
-                            <a href="{{ route('watchlist.index') }}">My Favourite Cars</a>
+                            <a href="{{ route('watchlist.index') }}">Omiljeni Automobili</a>
                         </li>
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
@@ -94,7 +94,7 @@
                         />
                     </svg>
 
-                    Signup
+                    Registracija
                 </a>
                 <a href="{{ route('login') }}" class="btn btn-login flex items-center">
                     <svg

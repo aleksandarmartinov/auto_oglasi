@@ -23,7 +23,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"
     rel="stylesheet"
     /> -->
-    <link rel="stylesheet" href="/css/app.css" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- <link rel="stylesheet" href="css/output.css" /> -->
 </head>
 
@@ -37,7 +37,7 @@ JGZLvPStWFv5Kww=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
 ></script>
-<script src="/js/app.js"></script>
+
 </body>
 </html>
 

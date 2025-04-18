@@ -1,5 +1,5 @@
 <x-guest-layout title="Login" bodyClass="page-login" :socialAuth="false">
-    <h1 class="auth-page-title">Reset Password</h1>
+    <h1 class="auth-page-title">Resetovanje Lozinke</h1>
 
     <form action="{{ route('password.update') }}" method="post">
         @csrf
@@ -14,18 +14,18 @@
         </div>
 
         <div class="form-group @error('password') has-error @enderror">
-            <input type="password" placeholder="New Password" name="password"/>
+            <input type="password" placeholder="Nova Lozinka" name="password"/>
             <div class="error-message">
                 {{ $errors->first('password') }}
             </div>
         </div>
 
         <div class="form-group">
-            <input type="password" placeholder="Repeat New Password" name="password_confirmation"/>
+            <input type="password" placeholder="Ponovite novu lozinku" name="password_confirmation"/>
         </div>
 
         <button class="btn btn-primary btn-login w-full">
-            Reset Password
+            Reset
         </button>
     </form>
 </x-guest-layout>

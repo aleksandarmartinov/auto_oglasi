@@ -1,7 +1,7 @@
 <x-app-layout>
     <main>
         <div class="container-small">
-            <h1 class="car-details-page-title">Add new car</h1>
+            <h1 class="car-details-page-title">Dodajte automobil</h1>
             <form
                 action="{{ route('car.store') }}"
                 method="POST"
@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group @error('maker_id') has-error @enderror">
-                                    <label>Maker</label>
+                                    <label>Proizvodjač</label>
                                     <x-select-maker :value="old('maker_id')"/>
                                     <p class="error-message">
                                         {{ $errors->first('maker_id') }}
@@ -23,7 +23,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group @error('model_id') has-error @enderror">
-                                    <label>Model</label>
+                                    <label>Marka</label>
                                     <x-select-model :value="old('model_id')"/>
                                     <p class="error-message">
                                         {{ $errors->first('model_id') }}
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group @error('year') has-error @enderror">
-                                    <label>Year</label>
+                                    <label>Godište</label>
                                     <x-select-year :value="old('year')"/>
                                     <p class="error-message">
                                         {{ $errors->first('year') }}
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="form-group @error('car_type_id') has-error @enderror">
-                            <label>Car Type</label>
+                            <label>Karoserija</label>
                             <x-radio-list-car-type :value="old('car_type_id')"/>
                             <p class="error-message">
                                 {{ $errors->first('car_type_id') }}
@@ -50,8 +50,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group @error('price') has-error @enderror">
-                                    <label>Price</label>
-                                    <input type="number" placeholder="Price" name="price"
+                                    <label>Cena</label>
+                                    <input type="number" placeholder="Cena" name="price"
                                            value="{{ old('price') }}"/>
                                     <p class="error-message">
                                         {{ $errors->first('price') }}
@@ -60,8 +60,8 @@
                             </div>
                             <div class="col">
                                 <div class="form-group @error('vin') has-error @enderror">
-                                    <label>Vin Code</label>
-                                    <input placeholder="Vin Code" name="vin"
+                                    <label>Broj Šasije</label>
+                                    <input placeholder="Broj Šasije" name="vin"
                                            value="{{ old('vin') }}"/>
                                     <p class="error-message">
                                         {{ $errors->first('vin') }}
@@ -70,8 +70,8 @@
                             </div>
                             <div class="col">
                                 <div class="form-group @error('mileage') has-error @enderror">
-                                    <label>Mileage (ml)</label>
-                                    <input placeholder="Mileage" name="mileage"
+                                    <label>Kilometraža (km)</label>
+                                    <input placeholder="Kilometraža" name="mileage"
                                            value="{{ old('mileage') }}"/>
                                     <p class="error-message">
                                         {{ $errors->first('mileage') }}
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="form-group @error('fuel_type_id') has-error @enderror">
-                            <label>Fuel Type</label>
+                            <label>Gorivo</label>
                             <x-radio-list-fuel-type :value="old('fuel_type_id')"/>
                             <p class="error-message">
                                 {{ $errors->first('fuel_type_id') }}
@@ -89,7 +89,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group @error('state_id') has-error @enderror">
-                                    <label>State/Region</label>
+                                    <label>Država/Region</label>
                                     <x-select-state :value="old('state_id')"/>
                                     <p class="error-message">
                                         {{ $errors->first('state_id') }}
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group @error('city_id') has-error @enderror">
-                                    <label>City</label>
+                                    <label>Grad</label>
                                     <x-select-city :value="old('city_id')"/>
                                     <p class="error-message">
                                         {{ $errors->first('city_id') }}
@@ -109,8 +109,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group @error('address') has-error @enderror">
-                                    <label>Address</label>
-                                    <input placeholder="Address" name="address"
+                                    <label>Adresa</label>
+                                    <input placeholder="Adresa" name="address"
                                            value="{{ old('address') }}"/>
                                     <p class="error-message">
                                         {{ $errors->first('address') }}
@@ -119,8 +119,8 @@
                             </div>
                             <div class="col">
                                 <div class="form-group @error('phone') has-error @enderror">
-                                    <label>Phone</label>
-                                    <input placeholder="Phone" name="phone"
+                                    <label>Telefon</label>
+                                    <input placeholder="Telefon" name="phone"
                                            value="{{ old('phone') }}"/>
                                     <p class="error-message">
                                         {{ $errors->first('phone') }}
@@ -130,14 +130,14 @@
                         </div>
                         <x-checkbox-car-features/>
                         <div class="form-group @error('description') has-error @enderror">
-                            <label>Detailed Description</label>
+                            <label>Opis</label>
                             <textarea rows="10" name="description">{{ old('description') }}</textarea>
                             <p class="error-message">
                                 {{ $errors->first('description') }}
                             </p>
                         </div>
                         <div class="form-group @error('published_at') has-error @enderror">
-                            <label>Publish Date</label>
+                            <label>Datum Objave</label>
                             <input type="date" name="published_at"
                                    value="{{ old('published_at') }}">
                             <p class="error-message">
@@ -175,8 +175,7 @@
                 </div>
                 <div class="p-medium" style="width: 100%">
                     <div class="flex justify-end gap-1">
-                        <button type="button" class="btn btn-default">Reset</button>
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Postavi Oglas</button>
                     </div>
                 </div>
             </form>

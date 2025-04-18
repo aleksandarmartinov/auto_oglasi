@@ -16,10 +16,15 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
+//        $request->validate([
+//            'name' => ['required', 'string', 'max:255'],
+//            'phone' => ['required', 'string', 'max:255', 'unique:users,phone,' . Auth::id()]
+//        ]);
+
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:255', 'unique:users,phone,' . Auth::id()]
-        ]);
+            'phone' => ['required', 'string', 'max:255', 'unique:users,phone,'.$request->user()->id]
+        ];
 
         $user = $request->user();
 
@@ -29,11 +34,13 @@ class ProfileController extends Controller
 
         $data = $request->validate($rules);
 
-        $user->fill($data);
+        $user->fill($data); // Update user sa novim podatcima kada je prosla validacija
 
-        $success = 'Your profile was updated';
+        $success = 'Your profile was updated'; // Za return
 
-        if (!$user->isDirty('email')) {
+        // Ako se email promenio onda mora i nov zahtev za verifikaciju emaila da se posalje pa email_verified_at field stavljamo null
+        // isDirty metoda je ako se nesto promenilo, ovde je to email
+        if ($user->isDirty('email')) {
             $user->email_verified_at = null;
             $user->sendEmailVerificationNotification();
             $success = 'Email Verification is required, please check your email';
@@ -58,7 +65,7 @@ class ProfileController extends Controller
         ]);
 
         $request->user()->update([
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password) // Hashed password
         ]);
 
         return back()->with('success', 'Password updated successfully');

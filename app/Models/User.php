@@ -66,6 +66,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isOauthUser(): bool
     {
-        return !$this->password;
+        return !$this->password; // Ako password ne postoji onda je user Oauth user
     }
 }

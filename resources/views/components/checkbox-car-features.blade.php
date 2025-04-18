@@ -2,8 +2,8 @@
 
 @php
     $features = [
-        'air_conditioning' => 'Air Conditioning',
-        'power_windows' => 'Power Windows',
+        'air_conditioning' => 'Klima',
+        'power_windows' => 'Električni podizači',
         'power_door_locks' => 'Power Door Locks',
         'abs' => 'ABS',
         'cruise_control' => 'Cruise Control',
@@ -25,7 +25,6 @@
                     <input
                         type="checkbox"
                         name="features[{{ $key }}]"
-{{--                        key je feature iz foreach loopa--}}
                         value="1"
                         @checked(old('features.'.$key, $car?->features->$key))
                     />
@@ -34,7 +33,7 @@
                 @if ($loop->iteration % 6 == 0 && !$loop->last)
         </div>
         <div class="col">
-            {{--            delim na 6 da bi se pojavile dve kolone, zatvara se jedna a otvara druga--}}
+            {{--delim na 6 da bi se pojavile dve kolone, zatvara se jedna a otvara druga--}}
             @endif
             @endforeach
         </div>

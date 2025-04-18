@@ -7,21 +7,19 @@
                 <div class="container">
                     <div class="slide-content">
                         <h1 class="hero-slider-title">
-                            Buy <strong>The Best Cars</strong> <br />
-                            in your region
+                            Kupi <strong>Najbolji Automobil</strong> <br />
+                            u tvojoj blizini!
                         </h1>
                         <div class="hero-slider-content">
                             <p>
-                                Use powerful search tool to find your desired cars based on
-                                multiple search criteria: Maker, Model, Year, Price Range, Car
-                                Type, etc...
+                                Ovaj sajt će Vam pomoći da pronadjete idealan automobil na osnovu kriterijuma kao što su : Proizvodjač, Marka automobila, Regija itd...
                             </p>
 
-                            <a href="{{ route('car.search') }}" class="btn btn-hero-slider">Find the car</a>
+                            <a href="{{ route('car.search') }}" class="btn btn-hero-slider">Pretražite Oglase</a>
                         </div>
                     </div>
                     <div class="slide-image">
-                        <img src="/img/car-png-39071.png" alt="" class="img-responsive" />
+                        <img src="{{ asset('img/blue-car.png') }}" alt="Car Image" class="img-responsive" />
                     </div>
                 </div>
             </div>
@@ -30,20 +28,19 @@
                 <div class="flex container">
                     <div class="slide-content">
                         <h2 class="hero-slider-title">
-                            Do you want to <br />
-                            <strong>sell your car?</strong>
+                            Da li možda<br />
+                            <strong>prodajete automobil?</strong>
                         </h2>
                         <div class="hero-slider-content">
                             <p>
-                                Submit your car in our user friendly interface, describe it,
-                                upload photos and the perfect buyer will find it...
+                                Ovaj sajt je idealno mesto da postavite oglas za vaš automobil i kupac će vas ubrzo pronaći!
                             </p>
 
-                            <a href="{{ route('car.create') }}" class="btn btn-hero-slider">Add Your Car</a>
+                            <a href="{{ route('car.create') }}" class="btn btn-hero-slider">Postavite Oglas</a>
                         </div>
                     </div>
                     <div class="slide-image">
-                        <img src="/img/car-png-39071.png" alt="" class="img-responsive" />
+                        <img src="{{ asset('img/blue-car.png') }}" alt="Car Image" class="img-responsive" />
                     </div>
                 </div>
             </div>
@@ -94,8 +91,8 @@
         <!-- New Cars -->
         <section>
             <div class="container">
-                <h2>Latest Added Cars</h2>
-                @if($cars->count() > 0 ))
+                <h2>Poslednje dodati automobili</h2>
+                @if($cars->count() > 0 )
                 <div class="car-items-listing">
                     @foreach($cars as $car)
                         <x-car-item :$car :is-in-watchlist="$car->favouredUsers->contains(Auth::user())"/>
@@ -103,7 +100,7 @@
                 </div>
                 @else
                     <div class="text-center p-large">
-                        There are no published cars.
+                        Ne postoje još objavljeni automobili.
                     </div>
                 @endif
             </div>

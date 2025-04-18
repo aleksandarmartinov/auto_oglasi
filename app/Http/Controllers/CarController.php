@@ -30,14 +30,26 @@ class CarController extends Controller
      */
     public function create()
     {
+        // Za usere koji su se registrovali preko Oauth pa nemaju phone number u profilu ('create' je iz CarPolicy)
+        if (!Gate::allows('create', Car::class)) {
+            return redirect()->route('profile.index')
+                ->with('warning', 'Please provide phone number on your profile');
+        }
+
         return view('car.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage.app
      */
     public function store(StoreCarRequest $request)
     {
+        // Za usere koji su se registrovali preko Oauth pa koristim CarPolicy / create metodu
+        if (!Gate::allows('create', Car::class)) {
+            return redirect()->route('profile.index')
+                ->with('warning', 'Please provide phone number on your profile');
+        }
+
         // Get request data and validate
         $data = $request->validated();
         // Get features
@@ -139,9 +151,7 @@ class CarController extends Controller
         $mileage = $request->integer('mileage');
         $sort = $request->input('sort', '-published_at');
 
-        $query = Car::where('published_at', '<', now())
-            ->with(['primaryImage', 'city', 'carType', 'fuelType', 'maker', 'model', 'favouredUsers'])
-        ;
+        $query = Car::with(['primaryImage', 'city', 'carType', 'fuelType', 'maker', 'model', 'favouredUsers']);
 
         if ($maker) {
             $query->where('maker_id', $maker);
@@ -150,8 +160,9 @@ class CarController extends Controller
             $query->where('model_id', $model);
         }
         if ($state) {
-            $query->join('cities', 'cities.id', '=', 'cars.city_id')
-                ->where('cities.state_id', $state); //join gde cities id iz tabele cities je jednak city id iz tabele auto
+            $query->whereHas('city', function ($q) use ($state) {
+                $q->where('state_id', $state);
+            });
         }
         if ($city) {
             $query->where('city_id', $city);
@@ -260,5 +271,10 @@ class CarController extends Controller
 
         return redirect()->back()
             ->with('success', 'New images were added');
+    }
+
+    public function showPhone(Car $car)
+    {
+        return response()->json(['phone' => $car->phone]);
     }
 }
