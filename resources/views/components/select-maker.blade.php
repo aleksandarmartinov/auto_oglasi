@@ -1,5 +1,5 @@
 <select id="makerSelect" name="maker_id">
-    <option value="" disabled selected hidden>Marka</option>
+    <option value="">Marka</option>
     @foreach($makers as $maker)
         <option value="{{ $maker->id }}"
             @selected($attributes->get('value') == $maker->id)>{{ $maker->name }}</option>
